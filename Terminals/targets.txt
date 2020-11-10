@@ -1,0 +1,79 @@
+"VNF23 logs"
+"geometry=55x20+0+0"
+spawn ssh cloud-user@10.133.113.84
+expect "password"
+send "<password_here>\r"
+expect "]\$"
+send "sudo su\r"
+expect "]#"
+send "cd /tmp/zaasnav/logs\r"
+expect "]#"
+interact
+-----
+"sftp1-RPM"
+"geometry=55x20+520+0"
+cd /home/zaasnav/EIR/RPM
+spawn sftp 10.83.140.38
+expect "password"
+send "<password_here>\r"
+expect "sftp>"
+send "cd /m_sftp/zaasnav/RPM\r"
+expect "sftp>"
+interact
+-----
+"sftp2-VNF23"
+"geometry=55x20+1040+0"
+cd /home/zaasnav/dapa/EIR/RPM
+spawn sftp cloud-user@10.133.113.84
+expect "password"
+send "<password_here>\r"
+expect "]\$"
+send "cd /tmp/zaasnav/logs\r"
+expect "]\$"
+interact
+-----
+"RPM deploy"
+"geometry=55x20+0+450"
+spawn ssh cloud-user@10.133.113.84
+expect "password"
+send "<password_here>\r"
+expect "]\$"
+send "sudo su\r"
+expect "]#"
+send "cd /tmp/zaasnav/RPM\r"
+expect "]#"
+interact
+-----
+"Openstack"
+"geometry=55x20+520+450"
+spawn ssh ceebackup@10.133.82.84
+expect "password"
+send "<password_here>\r"
+expect "]\$"
+send "sudo -i\r"
+expect "]#"
+send "cd /tmp/zaasnav\r"
+send "source openrc\r"
+expect "]#"
+send "openstack stack list\r"
+expect "]#"
+interact
+-----
+"NFVO"
+"geometry=55x20+1040+450"
+spawn ssh root@10.133.102.32
+expect "password"
+send "<password_here>\r"
+expect "]#"
+send "ls /tmp/\r"
+expect "]#"
+interact
+-----
+"jbosslogs"
+"geometry=55x20+1560+450"
+expect "password"
+send "<password_here>\r"
+expect "]\$"
+send "jbosslog > /tmp/vnf.log\r"
+expect "]\$"
+interact
